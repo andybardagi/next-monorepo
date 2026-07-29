@@ -32,6 +32,7 @@ Follow the existing pattern in `packages/ui/src/components/button.tsx`:
 - Set `data-slot="<component-name>"` on the rendered element.
 - Plain `function` declarations for components (no `React.FC`, no `forwardRef` unless a ref is actually consumed).
 - Spread `...props` last; accept `className` and merge it via `cn()`.
+- **Every component added to `packages/ui/src/components/` must have a matching story** in `apps/storybook/stories/<component>.stories.tsx` — the `reviewer` checks for this pairing before approving.
 
 ## Files & naming
 
