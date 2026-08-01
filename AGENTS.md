@@ -29,6 +29,7 @@ See `docs/architecture.md`. Dependency direction: `apps/web` â†’ `packages/ui` â
 
 ## Repo Structure
 /apps/web -> Next.js application
+/apps/storybook -> @workspace/storybook, Storybook docs/preview for @workspace/ui components
 /packages/ui -> @workspace/ui shared component library
 /packages/typescript-config -> shared tsconfig presets
 /docs/architecture.md -> architecture and placement rules
