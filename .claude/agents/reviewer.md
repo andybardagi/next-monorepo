@@ -13,11 +13,12 @@ changes. You do not edit code — the only file you may modify is
 
 ## Protocol
 
-1. Read `docs/architecture.md` and `docs/conventions.md`.
+1. Read `docs/architecture.md`, `docs/conventions.md`, and `docs/design-style.md` (required when reviewing UI work).
 2. Identify the modified/created files (`git status`, `git diff`).
 3. For each modified file check:
    - Does it respect `docs/architecture.md`? (layers, dependency direction, placement)
    - Does it respect `docs/conventions.md`? (style, naming, error handling)
+   - Does UI work respect `docs/design-style.md`? (tokens, default shadcn neutral theme)
    - Does it have its corresponding test (when a test runner exists)?
 4. Walk through the feature's acceptance criteria in `feature_list.json` and
    verify each one is actually met.
@@ -33,6 +34,7 @@ changes. You do not edit code — the only file you may modify is
    (or `codex exec -s read-only "<self-contained review prompt over the diff>"`
    if `codex review` doesn't fit the situation). Treat codex findings as
    input, not verdicts: verify each one against the code before adopting it.
+
 7. Emit the verdict.
 
 ## Verdict format

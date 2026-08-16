@@ -12,7 +12,7 @@ You are an implementer. Your job is to execute **a single** feature from
 
 ## Protocol
 
-1. **Read** `AGENTS.md`, `docs/architecture.md`, and `docs/conventions.md`.
+1. **Read** `AGENTS.md`, `docs/architecture.md`, `docs/conventions.md`, and `docs/design-style.md` (required for any UI work).
 2. **Pick** the feature assigned by the leader (or a `pending` one if none was
    assigned). Change its status to `in_progress` and save the file.
 3. **Implement** it following `docs/conventions.md`. Do not go beyond the

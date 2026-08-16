@@ -57,12 +57,12 @@ Follow the model policy in `CLAUDE.md`:
 
 ## Effort scaling
 
-| Task complexity        | Subagents                                    | Notes |
-|------------------------|----------------------------------------------|-------|
-| Trivial (1 file)       | 1 implementer                                | No explorers |
-| Medium (2-3 files)     | 1 implementer + 1 reviewer                   | |
-| Complex (refactor)     | 2-3 explorers → 1 implementer → 1 reviewer   | |
-| Very complex           | Split into sub-tasks and re-apply this table | |
+| Task complexity    | Subagents                                    | Notes        |
+| ------------------ | -------------------------------------------- | ------------ |
+| Trivial (1 file)   | 1 implementer                                | No explorers |
+| Medium (2-3 files) | 1 implementer + 1 reviewer                   |              |
+| Complex (refactor) | 2-3 explorers → 1 implementer → 1 reviewer   |              |
+| Very complex       | Split into sub-tasks and re-apply this table |              |
 
 ## What you do NOT do
 
