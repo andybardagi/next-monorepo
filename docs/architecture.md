@@ -29,13 +29,30 @@ apps/storybook ──►      │
 ## apps/web layout
 
 ```
-app/          → routes (App Router: layout.tsx, page.tsx)
-components/   → app-specific components (e.g. theme-provider.tsx)
+app/          → routes (App Router: layout.tsx, page.tsx) — thin: pages/layouts only, no business logic
+components/   → app-specific components grouped by feature/surface (e.g. theme-provider.tsx, query-provider.tsx)
 hooks/        → app-specific hooks
 lib/          → app-specific utilities
+src/helpers/  → shared helper functions/schemas used by multiple frontend components or by both frontend and backend
+tests/        → all *.test.ts / *.test.tsx files, mirroring the app/lib/src tree (see Testing layout below)
 ```
 
 Path alias `@/*` resolves to the app root (see `apps/web/tsconfig.json`).
+
+Keep `app/` route segments thin. Do not place route-private UI in `app/**/_components`, and do not place shared helper code in
+`app/**/_lib`. App-specific UI belongs under `apps/web/components/<area>/`; shared helper-like code belongs under
+`apps/web/src/helpers/`.
+
+`QueryProvider` (TanStack Query) lives next to `ThemeProvider` under `apps/web/components/`.
+
+Backend layout (API framework, DB, migrations) is undecided — see pending items in `feature_list.json`.
+
+### apps/web testing layout
+
+All test files live under `apps/web/tests/`, mirroring the `app/`, `lib/`, and `src/` tree 1:1 — no `.test.ts`/`.test.tsx` files colocated next
+to source. Example: `apps/web/src/helpers/generate-id.ts` is tested at `apps/web/tests/src/helpers/generate-id.test.ts`.
+When a test runner is added (the first feature that needs tests must add Vitest), `*.integration.test.ts` files live in the same
+mirrored location as their unit-test counterparts, distinguished by the `.integration.test.ts` suffix.
 
 ## apps/storybook layout
 
@@ -59,13 +76,23 @@ src/styles/       → globals.css (Tailwind v4 theme, design tokens)
 
 - Reusable across apps or design-system material → `packages/ui/src/components/`.
 - Specific to one app (wiring, providers, page sections) → `apps/web/components/`.
+- Group app components by domain/surface inside `apps/web/components/` (`auth/`, `workspace/`, `landing/`, ...), not in `app/**/_components`.
 - When in doubt, start app-local; promote to `@workspace/ui` only when a second consumer appears.
+
+## Helper placement rule
+
+- Shared helper functions, schemas, and small pure utilities used by multiple app components or by both frontend and backend →
+  `apps/web/src/helpers/`.
+- Persistence-backed, framework, service, adapter, database, and route-handler code stays in `apps/web/lib/` once a backend is chosen
+  (see pending items in `feature_list.json`).
+- Do not add `app/**/_lib` folders for shared helper code.
 
 ## Styling & theming
 
 - Tailwind CSS v4 via `@tailwindcss/postcss`. No `tailwind.config.js` — theme lives in `packages/ui/src/styles/globals.css` (imported once in `apps/web/app/layout.tsx` as `@workspace/ui/globals.css`).
 - Design tokens are CSS variables (`--primary`, `--muted`, `--radius-*`, …); components reference them through Tailwind utilities (`bg-primary`, etc.).
 - Dark mode via `next-themes` (`ThemeProvider` in `apps/web/components/theme-provider.tsx`, `suppressHydrationWarning` on `<html>`).
+- Visual rules live in `docs/design-style.md`. Keep the default shadcn neutral (black-and-white) theme.
 
 ## Build orchestration
 
